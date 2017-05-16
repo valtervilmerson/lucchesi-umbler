@@ -1,0 +1,50 @@
+.cinza{
+    background: gray;
+}
+
+.vermelho{
+    background: red;
+}
+
+.amarelo{
+    background: yellow;
+}
+
+.azul{
+    background: cornflowerblue;
+}
+
+.verde{
+    background: green;
+}
+
+.rosa{
+    background: pink;
+}
+
+.roxo{
+    background: violet;
+}
+
+
+#form-container{
+    width: 100vw;
+    height: 100vh;
+    background: #6C7A89;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#form-box{
+    width: 300px;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+
+.padding-teste p{
+    padding: 15px;
+}

@@ -5,8 +5,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
-    <link href="css/estilo.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" media="all" href="css/bootstrap.min.css">
+    <link href="css/estilo.css" rel="stylesheet" media="all">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <title>Curso Bootstrap!</title>
@@ -235,17 +235,239 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 padding-teste">
+
+                <h1>Responsive Utilities</h1>
                 <p class="bg-primary visible-xs-block">Você está na resoluação xs</p>
                 <p class="bg-danger visible-sm-block">Você está na resoluação sm</p>
                 <p class="bg-warning visible-md-block">Você está na resoluação md</p>
                 <p class="bg-warning visible-lg-block">Você está na resoluação lg</p>
-                
+
+                <a href="#" class="btn btn-default hidden-xs hidden-sm form-control">Acesse nossa versão mobile!</a>
+
+            </div>
+
+            <div class="col-xs-12 padding-teste">
+                <h1>Tipos</h1>
+
+                <a href="#" class="visible-sm-block btn btn-success">Block</a>
+                <a href="#" class="visible-sm-inline btn btn-danger">Inline</a>
+                <a href="#" class="visible-sm-inline-block btn btn-warning">Inline-block</a>
+
+            </div>
+
+            <div class="col-xs-12 padding-teste">
+                <h1>Só na impressão ou só na página?</h1>
+                <h2 class="hidden-print">Isso aqui aparece somente na página</h2>
+                <h2 class="visible-print-block">Isso aqui aparece somente na impressão</h2>
+
+
             </div>
         </div>
-        
+
     </div>
 
+    <hr>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="#" class="btn btn-success">
+                    <span class="glyphicon glyphicon-search"></span> Buscar
+                </a>
+            </div>
+
+            <div class="col-xs-12 padding-teste">
+                <p class="bg-success">
+                    <span class="glyphicon glyphicon-search pull-right"></span> Buscar
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>DropDowns</h1>
+
+                <div class="dropdown">
+                    <button type="button" id="btnDropdown01" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                        Menu Dropdown
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="btnDropdown01">
+
+                        <li role="presentation" class="dropdown-header">Cabeçalho</li>
+
+                        <li role="presentation" class="disabled">
+                            <a href="#" role="menuitem">Submenu</a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#" role="menuitem">Submenu</a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#" role="menuitem">Submenu</a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#" role="menuitem">Submenu</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h1>Button groups</h1>
+
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">Item</button>
+                        <button type="button" class="btn btn-default">Item</button>
+                        <button type="button" class="btn btn-default">Item</button>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">Item</button>
+                        <button type="button" class="btn btn-default">Item</button>
+                        <button type="button" class="btn btn-default">Item</button>
+
+                        <div class="btn-group">
+                            <div class="dropdown">
+                                <button type="button" id="btnDropdown02" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Menu Dropdown
+                                        <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="btnDropdown02">
+
+                                    <li role="presentation" class="dropdown-header">Cabeçalho</li>
+
+                                    <li role="presentation" class="disabled">
+                                        <a href="#" role="menuitem">Submenu</a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#" role="menuitem">Submenu</a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#" role="menuitem">Submenu</a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#" role="menuitem">Submenu</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-toolbar">
+                    <div class="btn-group-justified">
+                        <a class="btn btn-success">Item</a>
+                        <a class="btn btn-success">Item</a>
+                        <a class="btn btn-success">Item</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Menu Dropdown
+                                        <span class="caret"></span>
+                                </button>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li role="presentation" class="dropdown-header">Cabeçalho</li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Menu Dropdown
+                                        <span class="caret"></span>
+                                </button>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li role="presentation" class="dropdown-header">Cabeçalho</li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <div class="dropup">
+                        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Menu Dropdown
+                                        <span class="caret"></span>
+                                </button>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li role="presentation" class="dropdown-header">Cabeçalho</li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#" role="menuitem">Submenu</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
 </body>

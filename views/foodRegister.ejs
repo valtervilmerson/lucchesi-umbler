@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/listStyle.css">
+    <style>
+        .linhaSelecionada {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CADASTRO DE ALIMENTOS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="foodRegister/bankList">Home<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <label>Nome: </label>
+    <input type="text" id="nome">
+    <br>
+    <label for="">Descrição:</label>
+    <input type="text" id="descricao">
+    <br>
+    <br>
+    <label for="">Nutriente:</label>
+    <select name="nutrients" id="nutrients">
+        <% for (let index = 0; index < list.length; index++) {%>
+        <option value=<%=list[index].NU_ID%> data-descritivo=<%=list[index].NU_UNIT_DESCRIPTION%>>
+            <%=list[index].NU_DESCRIPTION + " ("+  list[index].NU_UNIT + ")"%>
+            <% } %>
+    </select>
+    <label for="">Quantidade:</label>
+    <input type="number" id="quantidade" min="0">
+    <button class="btn btn-dark" type="button" onclick="nutrientInsert()">+</button>
+    <button class="btn btn-dark" type="button" onclick="nutrientRemove()">&nbsp-&nbsp</button>
+    <br>
+    <br>
+    <div class="form-group">
+        <select multiple class="form-control" id="nutrients_select">
+        </select>
+    </div>
+    <br>
+
+    <div id="input-file">
+        <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+            <input type="file" name="img" id='file-input' /><br /><br />
+        </form>
+    </div>
+    <br>
+    <input type="button" value="Cadastrar" onclick="foodInsert()">
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="javascripts/script.js"></script>
+    <script src="javascripts/load-image.all.min.js"></script>
+
+    <div style="height: 100px; width: 100%; background-color: lightgray;"></div>
+
+    <table style="width: 100%;">
+        <tr>
+            <td>Linha 1</td>
+        </tr>
+        <tr>
+            <td>Linha 2</td>
+        </tr>
+        <tr>
+            <td>Linha 3</td>
+        </tr>
+        <tr>
+            <td>Linha 4</td>
+        </tr>
+        <tr>
+            <td>Linha 5</td>
+        </tr>
+    </table>
+    <button id="btnDeleteLinha">delete linha</button>
+    <script>
+        $('tr').on('click', function(){
+            $('.linhaSelecionada').removeClass('linhaSelecionada');
+            $(this).addClass('linhaSelecionada');
+        })
+        $('#btnDeleteLinha').on('click',function(){
+            $('.linhaSelecionada').remove()
+        })
+    </script>
+</body>
+
+</html>

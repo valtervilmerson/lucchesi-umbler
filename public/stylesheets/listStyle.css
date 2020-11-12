@@ -1,0 +1,12 @@
+.table{
+    margin-top: 50px;
+}
+
+#tabela_nutrientes{
+    border-width: 50px;
+    border-color:black;
+}
+
+#quantidade{
+    width: 80px;   
+}

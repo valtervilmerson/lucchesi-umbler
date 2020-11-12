@@ -1,0 +1,53 @@
+body{  
+    background-image: url(../images/background6.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main-section{
+    margin: 0 auto;
+    margin-top: 130px;
+    padding:0;
+}
+
+.modal-content{
+    background-color: #434e5e;
+    opacity: .9;
+    padding:10px;
+    border-radius: 10px;
+}
+
+.user-img img{
+    height: 120px;
+    width: 120px;
+}
+
+.user-img{
+       margin-bottom: 45px;
+}
+
+form-group{
+    margin-bottom: 25px;
+}
+
+.form-input button{
+    /* opacity: inherit; */
+    margin: 5px 0 25px;
+}
+
+#painelLogin {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    width: 500px;
+}
+
+.forgot a{
+    color:white;
+}
+
+
+

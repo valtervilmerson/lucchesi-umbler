@@ -34,8 +34,7 @@ app.use(function(req, res, next){
 
 /* middleware que configura msgs de erro internos */
 app.use(function(err, req, res, next){
-	let erros = 'Erro: ' + err
-	res.status(500).render('errors/500', {erro: erros});
+	res.status(500).render('errors/500', {erro: err});
 	
 	next();
 });

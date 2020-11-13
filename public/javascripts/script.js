@@ -1,17 +1,17 @@
 
 var urlServer = "http://localhost:3000/"
+var teste = console.env.HOST
+console.log(teste)
 var host = String(document.querySelector('span#host').value)
 console.log(host)
-console.log(document.querySelector('span#host').value)
+console.log(document.querySelector('span#host'))
 
 if (host != undefined) {
     urlServer = host
-} else {
-    urlServer = "http://localhost:3000/"
-}
+} 
 
 function login() {
-
+    console.log(host)
     var json = {
         usuario: document.getElementById('usuario').value,
         senha: document.getElementById('senha').value

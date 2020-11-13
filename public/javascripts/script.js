@@ -1,7 +1,8 @@
 
 const urlServer = "http://localhost:3000/"
-const host = String(document.querySelector('span#host').value)
+let host = String(document.querySelector('span#host').value)
 console.log(host)
+console.log(document.querySelector('span#host').value)
 
 if (host != undefined) {
     urlServer = host

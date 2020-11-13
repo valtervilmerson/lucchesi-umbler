@@ -2,7 +2,8 @@ express = require('express')
 router = express()
 
 router.get('/', function(req, res){
-    res.render('index')
+    let host = process.env.HOST
+    res.render('index', {host: host})
 })
 
 

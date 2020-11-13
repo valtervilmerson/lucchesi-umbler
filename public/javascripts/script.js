@@ -1,4 +1,12 @@
+
 const urlServer = "http://localhost:3000/"
+const host = document.querySelector('span#host').value
+
+if (host != undefined) {
+    urlServer = host
+} else {
+    urlServer = "http://localhost:3000/"
+}
 
 function login() {
 
@@ -39,11 +47,11 @@ function foodInsert() {
         let qtd = v.substring(pos + 2)
         return qtd
     }
-	
+
     SendRequest(json, "foodRegister/insert", function () {
         alert("Ocorreu um erro na chamada")
     })
-    
+
     sendImage(urlServer + "foodRegister/imageUpload")
 }
 
@@ -63,7 +71,7 @@ document.getElementById('file-input').onchange = function () {
 }
 
 function SendRequest(json, url, callback) {
-    
+
     json = JSON.stringify(json)
 
     var conexao = new XMLHttpRequest()

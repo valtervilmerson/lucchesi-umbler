@@ -11,7 +11,7 @@ app.set('views', path.join(process.cwd(), 'views'))
 app.set('view engine', 'ejs')
 
 //middlewares
-app.use(express.static(path.join(process.cwd(), './public')))
+app.use(express.static(path.join(process.cwd(), 'public')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(function (req, res, next) {

@@ -60,11 +60,11 @@ module.exports = DbConnection
 
 class dbConnection {
     constructor() {
-        this.__sqlite = require('sqlite3').verbose()
+        this._sqlite = require('sqlite3').verbose()
     }
 
     Connection() {    
-        var db = new this.__sqlite.Database('./db/LUCCHESI.db')
+        var db = new this._sqlite.Database('./db/LUCCHESI.db')
         return db      
     }
 }

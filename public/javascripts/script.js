@@ -1,4 +1,4 @@
-const urlServer = "http://localhost:3000/"
+const urlServer = "http://nutrisa-com-br.umbler.net/"
 
 function login() {
 

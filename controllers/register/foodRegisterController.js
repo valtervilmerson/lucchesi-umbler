@@ -149,6 +149,7 @@ module.exports.bankList = function (req, res) {
             */
 
             //método jsgrid
+            //une os registros com o mesmo id de alimento
             var resultado = []
             for (let i of rows) {
                 let novo = true
@@ -174,7 +175,7 @@ module.exports.bankList = function (req, res) {
 
             rows = resultado
 
-            //insere ao fim do json os nutrientes cadastrados para montar as colunas da tabela
+            //monta um json com todos os nutrientes cadastrados
             var json = {}
             json.nutrientsList = []
             json.nutrientsUnit = []
@@ -182,6 +183,20 @@ module.exports.bankList = function (req, res) {
                 json.nutrientsList.push(nutrientsRows[x].NU_DESCRIPTION)
                 json.nutrientsUnit.push(nutrientsRows[x].NU_UNIT)
             }
+
+            //adiciona 0 no valor dos nutrientes que o alimento não possui
+            let array = []
+            for (let i in rows) {
+                array = Object.keys(rows[i])
+                for (x in json.nutrientsList) {
+                    if (array.indexOf(json.nutrientsList[x]) == -1) {
+                        rows[i][json.nutrientsList[x]] = 0
+                    }
+                }
+
+            }
+
+            //adiciona os nutrientes cadastrados ao fim da array para montagem das colunas da tabela
             rows.push(json)
 
             if (rows) {

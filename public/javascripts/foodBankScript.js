@@ -1,8 +1,7 @@
 
+const urlServer = "http://nutrisa-com-br.umbler.net/foodRegister/bankList"
 
-
-var food = [{}]
-
+/* 
 var clients = [
     { "Name": "Otto Clay", "Age": 25, "Country": 1, "Address": "Ap #897-1459 Quam Avenue", "Married": false },
     { "Name": "Connor Johnston", "Age": 45, "Country": 2, "Address": "Ap #370-4647 Dis Av.", "Married": true },
@@ -17,12 +16,12 @@ var countries = [
     { Name: "Canada", Id: 2 },
     { Name: "United Kingdom", Id: 3 }
 ]
-
+ */
 
 
 $.ajax({
     headers: { Accept: "application/json" },
-    url: "http://localhost:3000/foodRegister/bankList",
+    url: urlServer,
     success: function (data) {
 
         var nutrients = data.pop()
@@ -30,7 +29,7 @@ $.ajax({
         var campos = [
             { type: "control" },
             { name: "ALIMENTO", type: "text", width: 150, validate: "required", title: "Alimento", align:"center"  },
-            { name: "DESCRICAO", type: "text", width: 150, tilte: "Descrição", align:"center"}
+            { name: "DESCRICAO", type: "text", width: 150, title: "Descrição", align:"center"}
         ]
         
         
@@ -43,7 +42,7 @@ $.ajax({
         
         function monta(campos){
         for (let x in nutrients.nutrientsList){
-            campos.push(JSON.parse(`{"name":"${nutrients.nutrientsList[x]}", "width": "110", "type": "number", "default":"0", "align":"center"}`))
+            campos.push(JSON.parse(`{"name":"${nutrients.nutrientsList[x]}", "width": "110", "type": "number", "align":"center"}`))
 
         }
         return campos
@@ -52,21 +51,26 @@ $.ajax({
 
     function jGrid(campos, data){
 
-console.log('dentro do jgrid: ' + JSON.stringify(campos))
-console.log(data)
-
     $("#jsGrid").jsGrid({
+        height: "600",
         width: "100%",
-        height: "600px",
 
-        inserting: true,
         editing: true,
         sorting: true,
         paging: true,
+        autoload: true,
+ 
+        pageSize: 20,
+        pageButtonCount: 5,
+ 
+        deleteConfirm: "Deseja deletar o registro?",
 
         data: data,
 
-        fields: campos/* [
+        fields: campos,
+
+        //referencia de como o cabecalho da tabela é montado
+        /* [
             { name: "ALIMENTO", type: "text", width: 150, validate: "required", title: "Alimento" },
             { name: "DESCRICAO", type: "text", width: 150 },
             { name: "QUANTIDADE", type: "number", width: 100, align: "center" },

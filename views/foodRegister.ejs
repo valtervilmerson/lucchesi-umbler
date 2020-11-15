@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/listStyle.css">
-    <style>
-        .linhaSelecionada {
-            background-color: pink;
-        }
-    </style>
 </head>
 
 <body>
@@ -50,15 +45,33 @@
     <label for="">Quantidade:</label>
     <input type="number" id="quantidade" min="0">
     <button class="btn btn-dark" type="button" onclick="nutrientInsert()">+</button>
-    <button class="btn btn-dark" type="button" onclick="nutrientRemove()">&nbsp-&nbsp</button>
+    <button class="btn btn-dark" type="button" onclick="nutrientRemove()" id="btnRemove">&nbsp-&nbsp</button>
     <br>
     <br>
     <div class="form-group">
         <select multiple class="form-control" id="nutrients_select">
         </select>
     </div>
-    <br>
 
+    <br>
+    <!-- <table class="table" id="nutrientsTable">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nutriente</th>
+                <th scope="col">Unidade</th>
+                <th scope="col">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr id = "firstRow">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table> -->
     <div id="input-file">
         <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
             <input type="file" name="img" id='file-input' /><br /><br />
@@ -68,10 +81,7 @@
     <input type="button" value="Cadastrar" onclick="foodInsert()">
 
 
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
@@ -80,36 +90,8 @@
         crossorigin="anonymous"></script>
     <script src="javascripts/script.js"></script>
     <script src="javascripts/load-image.all.min.js"></script>
+    
 
-    <div style="height: 100px; width: 100%; background-color: lightgray;"></div>
-
-    <table style="width: 100%;">
-        <tr>
-            <td>Linha 1</td>
-        </tr>
-        <tr>
-            <td>Linha 2</td>
-        </tr>
-        <tr>
-            <td>Linha 3</td>
-        </tr>
-        <tr>
-            <td>Linha 4</td>
-        </tr>
-        <tr>
-            <td>Linha 5</td>
-        </tr>
-    </table>
-    <button id="btnDeleteLinha">delete linha</button>
-    <script>
-        $('tr').on('click', function(){
-            $('.linhaSelecionada').removeClass('linhaSelecionada');
-            $(this).addClass('linhaSelecionada');
-        })
-        $('#btnDeleteLinha').on('click',function(){
-            $('.linhaSelecionada').remove()
-        })
-    </script>
 </body>
 
 </html>

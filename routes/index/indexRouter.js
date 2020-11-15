@@ -1,11 +1,9 @@
-express = require('express')
-router = express()
+var express = require('express')
+var indexController = require('../../controllers/home/indexController')
+var router = express()
 
-router.get('/', function(req, res){
-    let host = process.env.HOST
-    console.log(host)
-    res.render('index', {url:host})
+router.get('/', function (req, res) {
+    indexController.index(req, res)
 })
-
 
 module.exports = router

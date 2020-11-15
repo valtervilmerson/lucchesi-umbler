@@ -3,6 +3,11 @@ var foodDAO = require('../../models/register/foodDAO')
 
 module.exports.foodRegister = function (req, res) {
 
+    if (req.session.authorized != true) {
+        res.redirect('/')
+        return
+    }
+
     var connection = new dbConnection
     var db = connection.Connection()
     var foodModel = new foodDAO(db)
@@ -21,13 +26,13 @@ module.exports.foodRegister = function (req, res) {
 module.exports.foodInsert = function (req, res) {
 
     /* 
-    {
-      name: 'system of a down',
-      desc: 'system of a down',
-      nutrientID: [ '1', '3' ],
-      qtd: [ '1', '2' ]
-    } 
-    */
+   {
+     name: 'system of a down',
+     desc: 'system of a down',
+     nutrientID: [ '1', '3' ],
+     qtd: [ '1', '2' ]
+   } 
+   */
 
     var requisition = req.body
     var connection = new dbConnection
@@ -69,7 +74,7 @@ module.exports.foodInsert = function (req, res) {
     foodModel.NutrientsList(function (err, rows) {
         if (rows) {
             res.redirect('./bankList')
-            
+
         } else {
             res.sendStatus(400)
         }
@@ -80,6 +85,11 @@ module.exports.foodInsert = function (req, res) {
 
 
 module.exports.bankList = function (req, res) {
+
+    if (req.session.authorized != true) {
+        res.redirect('/')
+        return
+    }
 
     var connection = new dbConnection
     var db = connection.Connection()
@@ -114,27 +124,54 @@ module.exports.bankList = function (req, res) {
             //     }
 
             // }
+            /* método carregando a view
+                        var resultado = []
+                        for (let i of rows) {
+                            let novo = true
+                            for (let x = 0; x < resultado.length; x++) {
+                                if (resultado[x].FOOD_ID == i.FOOD_ID) {
+                                    resultado[x].NUTRIENTE.push(i.NUTRIENTE)
+                                    resultado[x].QUANTIDADE.push(i.QUANTIDADE)
+                                    novo = false
+                                }
+                            }
+                            if (novo) {
+                                resultado.push({
+                                    FOOD_ID: i.FOOD_ID,
+                                    ALIMENTO: i.ALIMENTO,
+                                    DESCRICAO: i.DESCRICAO,
+                                    NUTRIENTE: [i.NUTRIENTE],
+                                    QUANTIDADE: [i.QUANTIDADE]
+                                })
+                            }
+                        }
+                        rows = resultado
+            */
 
+            //método jsgrid
             var resultado = []
             for (let i of rows) {
                 let novo = true
+                let a
                 for (let x = 0; x < resultado.length; x++) {
                     if (resultado[x].FOOD_ID == i.FOOD_ID) {
-                        resultado[x].NUTRIENTE.push(i.NUTRIENTE)
-                        resultado[x].QUANTIDADE.push(i.QUANTIDADE)
+                        resultado[x][i.NUTRIENTE] = (i.QUANTIDADE)
                         novo = false
                     }
                 }
                 if (novo) {
-                    resultado.push({
+
+                    let v = {
                         FOOD_ID: i.FOOD_ID,
                         ALIMENTO: i.ALIMENTO,
                         DESCRICAO: i.DESCRICAO,
-                        NUTRIENTE: [i.NUTRIENTE],
-                        QUANTIDADE: [i.QUANTIDADE]
-                    })
+                    }
+
+                    v[i.NUTRIENTE] = i.QUANTIDADE
+                    resultado.push(v)
                 }
             }
+
             rows = resultado
 
             //insere ao fim do json os nutrientes cadastrados para montar as colunas da tabela
@@ -146,9 +183,18 @@ module.exports.bankList = function (req, res) {
                 json.nutrientsUnit.push(nutrientsRows[x].NU_UNIT)
             }
             rows.push(json)
-            //console.log(rows)
+
             if (rows) {
-                res.render('foodBank', { bank: rows })
+                res.format({
+                    html: function () {
+                        res.render('foodbank')
+                    },
+                    json: function () {
+                        res.json(rows)
+                    }
+                })
+
+
             }
 
         })
@@ -164,16 +210,16 @@ module.exports.foodImageUpload = function (req, res) {
     var db = connection.Connection()
     var foodModel = new foodDAO(db)
     console.log(req.file)
-    
-    if (req.file != undefined){
-    foodModel.lastID(function (err, lastIDRows) {
-        foodModel.imageURLInsert(req.file.filename, lastIDRows.lastID, function (err, rows) {
-            if (!err) {
-                res.sendStatus(200)
-            }
 
+    if (req.file != undefined) {
+        foodModel.lastID(function (err, lastIDRows) {
+            foodModel.imageURLInsert(req.file.filename, lastIDRows.lastID, function (err, rows) {
+                if (!err) {
+                    res.sendStatus(200)
+                }
+
+            })
         })
-    })
-}
-db.close()
+    }
+    db.close()
 }

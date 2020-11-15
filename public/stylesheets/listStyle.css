@@ -10,3 +10,7 @@
 #quantidade{
     width: 80px;   
 }
+
+.linhaSelecionada {
+    background-color: pink;
+}

@@ -1,5 +1,4 @@
-
-var urlServer = "http://nutrisa-com-br.umbler.net/"
+const urlServer = "http://localhost:3000/"
 
 function login() {
 
@@ -11,9 +10,7 @@ function login() {
     SendRequest(json, "login", function () {
         alert("Usuário ou senha incorretas")
     })
-
 }
-
 
 function foodInsert() {
 
@@ -48,7 +45,7 @@ function foodInsert() {
     sendImage(urlServer + "foodRegister/imageUpload")
 }
 
-document.getElementById('file-input').onchange = function () {
+/* document.getElementById('file-input').onchange = function () {
     var registerImage = document.getElementById('input-file')
     loadImage(
         this.files[0],
@@ -61,7 +58,7 @@ document.getElementById('file-input').onchange = function () {
         },
         { maxWidth: 200, meta: true } // Options
     )
-}
+} */
 
 function SendRequest(json, url, callback) {
 
@@ -84,14 +81,33 @@ function SendRequest(json, url, callback) {
     }
 }
 
+
 function nutrientInsert() {
+
+    /* var table = document.getElementById('tableBody')
+    var firstRow = document.getElementById('firstRow')
+    var rows = table.childElementCount - 1
+
+
+    if (firstRow != undefined) {
+        firstRow.remove()
+    }
+
+    $('#nutrientsTable').find('tbody')
+        .append('<tr class="linhaSelecionada">' +
+            '<td>' + `${rows + 1}` + '</td>' +
+            '<td>' + $('#nutrients :selected').text() + '</td>' +
+            '<td>' + document.querySelector('#nutrients option:checked').dataset.descritivo + '</td>' +
+            '<td>' + $('#quantidade').val() + '</td>'
+        ) */
+
     var nutrientsList = document.getElementById('nutrients_select')
     var option = document.createElement("option")
     option.innerHTML = $('#nutrients :selected').text() + "Quantidade: " + $('#quantidade').val() //+ " " + document.querySelector('#nutrients option:checked').dataset.descritivo
     numValues = nutrientsList.childElementCount + 1
     option.value = numValues
     option.id = $('#nutrients :selected').val()
-    nutrientsList.appendChild(option)
+    nutrientsList.appendChild(option) 
 }
 
 function nutrientRemove() {
@@ -134,5 +150,35 @@ function sendImage(url) {
             $("#result").text(e.responseText);
             console.log("ERROR : ", e);
         }
-    });
+    })
 }
+
+document.addEventListener("click", function () {
+    $('tr').on('click', function () {
+        $('.linhaSelecionada').removeClass('linhaSelecionada')
+        $(this).addClass('linhaSelecionada')
+    })
+});
+
+
+
+$('#btnRemove').on('click', function () {
+    $('.linhaSelecionada').remove()
+})
+
+$('#ajax').on('click', function(){
+$.ajax({
+    headers:{Accept: "application/json"},
+    url: "http://localhost:3000/foodRegister/bankList",
+    success: function (data) {
+        console.log("SUCCESS : ", data);
+    },
+    error: function (e, str) {
+        console.log("ERROR : ", e)
+        console.log(str);
+    }
+    })
+})
+
+
+

@@ -11,8 +11,9 @@ module.exports.loginController = function (req, res) {
     var loginModel = new loginDAO(db)
 
     loginModel.login(login, function (err, rows) {
-        //console.log(rows) 
+        
         if (rows) {
+            req.session.authorized = true
             res.redirect('foodRegister/bankList')
         } else {
             res.sendStatus(400)

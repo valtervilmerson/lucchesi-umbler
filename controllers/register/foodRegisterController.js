@@ -86,10 +86,10 @@ module.exports.foodInsert = function (req, res) {
 
 module.exports.bankList = function (req, res) {
 
-    if (req.session.authorized != true) {
+   /*  if (req.session.authorized != true) {
         res.redirect('/')
         return
-    }
+    } */
 
     var connection = new dbConnection
     var db = connection.Connection()
@@ -99,32 +99,7 @@ module.exports.bankList = function (req, res) {
 
         foodModel.NutrientsList(function (err, nutrientsRows) {
 
-            // var idFoodOut = 0
-            // var idFoodIn = 0
-            // //junta objetos com o mesmo id
-            // for (let y = 0; y < rows.length; y++) {
-
-            //     idFoodOut = rows[y].FOOD_ID
-            //     rows[y].NUTRIENTE = [rows[y].NUTRIENTE]
-            //     rows[y].QUANTIDADE = [rows[y].QUANTIDADE]
-
-            //     if (idFoodOut == idFoodIn || y == 0) {
-            //         if (y == 0) {
-            //             idFoodIn = rows[y].FOOD_ID
-            //         } else {
-            //             rows[y - 1].NUTRIENTE.push(rows[y].NUTRIENTE[0])
-            //             rows[y - 1].QUANTIDADE.push(rows[y].QUANTIDADE[0])
-            //             idFoodIn = rows[y].FOOD_ID
-            //             rows.splice([y], 1)
-            //             y--
-
-            //         }
-            //     } else {
-            //         idFoodIn = rows[y].FOOD_ID
-            //     }
-
-            // }
-            /* método carregando a view
+            /* //método carregando a view
                         var resultado = []
                         for (let i of rows) {
                             let novo = true
@@ -153,7 +128,6 @@ module.exports.bankList = function (req, res) {
             var resultado = []
             for (let i of rows) {
                 let novo = true
-                let a
                 for (let x = 0; x < resultado.length; x++) {
                     if (resultado[x].FOOD_ID == i.FOOD_ID) {
                         resultado[x][i.NUTRIENTE] = (i.QUANTIDADE)
@@ -161,13 +135,11 @@ module.exports.bankList = function (req, res) {
                     }
                 }
                 if (novo) {
-
                     let v = {
                         FOOD_ID: i.FOOD_ID,
                         ALIMENTO: i.ALIMENTO,
                         DESCRICAO: i.DESCRICAO,
                     }
-
                     v[i.NUTRIENTE] = i.QUANTIDADE
                     resultado.push(v)
                 }
@@ -193,7 +165,6 @@ module.exports.bankList = function (req, res) {
                         rows[i][json.nutrientsList[x]] = 0
                     }
                 }
-
             }
 
             //adiciona os nutrientes cadastrados ao fim da array para montagem das colunas da tabela
@@ -205,18 +176,15 @@ module.exports.bankList = function (req, res) {
                         res.render('foodbank')
                     },
                     json: function () {
+                        console.log(rows)
                         res.json(rows)
                     }
                 })
-
-
             }
-
         })
 
     })
     db.close()
-
 }
 
 

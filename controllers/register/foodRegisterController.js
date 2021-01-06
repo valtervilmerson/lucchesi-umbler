@@ -188,16 +188,19 @@ module.exports.bankList = function (req, res) {
 
 
 module.exports.foodImageUpload = function (req, res) {
+    console.log("controller imagem")
     var connection = new dbConnection
     var db = connection.Connection()
     var foodModel = new foodDAO(db)
-    console.log(req.file)
 
     if (req.file != undefined) {
         foodModel.lastID(function (err, lastIDRows) {
             foodModel.imageURLInsert(req.file.filename, lastIDRows.lastID, function (err, rows) {
                 if (!err) {
                     res.sendStatus(200)
+                }else{
+                    console.log("Erro do upload de imagem")
+                    console.log(err)
                 }
 
             })

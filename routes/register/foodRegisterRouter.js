@@ -17,6 +17,7 @@ router.get('/bankList', function (req, res) {
 })
 
 router.post('/imageUpload', multer.single('img'), function (req, res) {
+    console.log("rota imagem")
     foodController.foodImageUpload(req, res)
 })
 

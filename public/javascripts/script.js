@@ -4,8 +4,8 @@ const urlServer = "http://nutrisa-com-br.umbler.net/"
 function login() {
 
     var json = {
-        usuario: document.getElementById('usuario').value,
-        senha: document.getElementById('senha').value
+        usuario: document.getElementById('usuario').value.toUpperCase(),
+        senha: document.getElementById('senha').value.toUpperCase()
     }
 
     SendRequest(json, "login", function () {
@@ -46,7 +46,7 @@ function foodInsert() {
     sendImage(urlServer + "foodRegister/imageUpload")
 }
 
-/* document.getElementById('file-input').onchange = function () {
+ document.getElementById('file-input').onchange = function () {
     var registerImage = document.getElementById('input-file')
     loadImage(
         this.files[0],
@@ -59,7 +59,7 @@ function foodInsert() {
         },
         { maxWidth: 200, meta: true } // Options
     )
-} */
+} 
 
 function SendRequest(json, url, callback) {
 
@@ -160,6 +160,10 @@ document.addEventListener("click", function () {
         $(this).addClass('linhaSelecionada')
     })
 });
+
+$(document).keypress(function(e) {
+    if(e.which == 13) $('#btnLogin').click();
+})
 
 
 

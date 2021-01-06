@@ -173,10 +173,9 @@ module.exports.bankList = function (req, res) {
             if (rows) {
                 res.format({
                     html: function () {
-                        res.render('foodbank')
+                        res.render('foodBank')
                     },
                     json: function () {
-                        console.log(rows)
                         res.json(rows)
                     }
                 })

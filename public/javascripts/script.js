@@ -1,5 +1,5 @@
-const urlServer = "http://nutrisa-com-br.umbler.net/"
-//const urlServer = "http://localhost:3000/"
+//const urlServer = "http://nutrisa-com-br.umbler.net/"
+const urlServer = "http://localhost:3000/"
 
 function login() {
 
@@ -46,7 +46,11 @@ function foodInsert() {
     sendImage(urlServer + "foodRegister/imageUpload")
 }
 
- document.getElementById('file-input').onchange = function () {
+$(document).keypress(function (e) {
+    if (e.which == 13) $('#btnLogin').click()
+})
+
+document.getElementById('file-input').onchange = function () {
     var registerImage = document.getElementById('input-file')
     loadImage(
         this.files[0],
@@ -56,10 +60,12 @@ function foodInsert() {
                 registerImage.removeChild(registerImage.childNodes[3])
             }
             registerImage.appendChild(img)
-        },
-        { maxWidth: 200, meta: true } // Options
+        }, {
+            maxWidth: 200,
+            meta: true
+        } // Options
     )
-} 
+}
 
 function SendRequest(json, url, callback) {
 
@@ -108,7 +114,7 @@ function nutrientInsert() {
     numValues = nutrientsList.childElementCount + 1
     option.value = numValues
     option.id = $('#nutrients :selected').val()
-    nutrientsList.appendChild(option) 
+    nutrientsList.appendChild(option)
 }
 
 function nutrientRemove() {
@@ -161,9 +167,7 @@ document.addEventListener("click", function () {
     })
 });
 
-$(document).keypress(function(e) {
-    if(e.which == 13) $('#btnLogin').click();
-})
+
 
 
 
@@ -171,19 +175,18 @@ $('#btnRemove').on('click', function () {
     $('.linhaSelecionada').remove()
 })
 
-$('#ajax').on('click', function(){
-$.ajax({
-    headers:{Accept: "application/json"},
-    url: "http://localhost:3000/foodRegister/bankList",
-    success: function (data) {
-        console.log("SUCCESS : ", data);
-    },
-    error: function (e, str) {
-        console.log("ERROR : ", e)
-        console.log(str);
-    }
+$('#ajax').on('click', function () {
+    $.ajax({
+        headers: {
+            Accept: "application/json"
+        },
+        url: "http://localhost:3000/foodRegister/bankList",
+        success: function (data) {
+            console.log("SUCCESS : ", data);
+        },
+        error: function (e, str) {
+            console.log("ERROR : ", e)
+            console.log(str);
+        }
     })
 })
-
-
-

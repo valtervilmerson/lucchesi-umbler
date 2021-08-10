@@ -1,5 +1,5 @@
-const urlServer = "http://nutrisa-com-br.umbler.net"
-//const urlServer = "http://localhost:3000"
+//const urlServer = "http://nutrisa-com-br.umbler.net"
+const urlServer = "http://localhost:3000"
 
 var ids = {}
 
@@ -36,6 +36,15 @@ $(function () {
           type: "POST",
           url: urlServer + "/foodRegister/jsGridInsert",
           data: insertedItens,
+        })
+      },
+      deleteItem: function (item) {
+        let deletedItem = { foodId: item.FOOD_ID }
+        console.log(deletedItem)
+        return $.ajax({
+          type: "POST",
+          url: urlServer + "/foodRegister/jsGridDelete",
+          data: deletedItem,
         })
       },
     },

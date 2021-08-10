@@ -20,8 +20,10 @@ router.post("/imageUpload", multer.single("img"), function (req, res) {
 })
 
 router.post("/jsGridInsert", function (req, res) {
-  console.log("rota")
   foodController.jsGridInsert(req, res)
 })
 
+router.post("/jsGridDelete", function (req, res) {
+  foodController.jsGridDelete(req, res)
+})
 module.exports = router

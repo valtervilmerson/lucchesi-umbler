@@ -63,4 +63,11 @@ FoodRegisterDAO.prototype.imageURLInsert = function (
   )
 }
 
+FoodRegisterDAO.prototype.deleteItem = function (req, callback) {
+  this._connection.run("DELETE FROM FOOD WHERE FOOD_ID = " + req.foodId)
+  this._connection.run(
+    "DELETE FROM FOOD_X_NUTRIENTS WHERE FXN_FOOD_ID = " + req.foodId
+  )
+}
+
 module.exports = FoodRegisterDAO

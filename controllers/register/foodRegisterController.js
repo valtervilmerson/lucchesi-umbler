@@ -52,6 +52,17 @@ module.exports.jsGridInsert = function (req, res) {
   res.end()
 }
 
+module.exports.jsGridDelete = function (req, res) {
+  let connection = new dbConnection()
+  let db = connection.Connection()
+  let foodModel = new foodDAO(db)
+  let requisition = req.body
+
+  foodModel.deleteItem(requisition, function (req, res) {})
+  db.close()
+  res.end()
+}
+
 module.exports.foodInsert = function (req, res) {
   var requisition = req.body
   var connection = new dbConnection()
@@ -92,31 +103,6 @@ module.exports.bankList = function (req, res) {
 
   foodModel.foodBankListData(function (err, rows) {
     foodModel.NutrientsList(function (err, nutrientsRows) {
-      /* //método carregando a view
-                        var resultado = []
-                        for (let i of rows) {
-                            let novo = true
-                            for (let x = 0; x < resultado.length; x++) {
-                                if (resultado[x].FOOD_ID == i.FOOD_ID) {
-                                    resultado[x].NUTRIENTE.push(i.NUTRIENTE)
-                                    resultado[x].QUANTIDADE.push(i.QUANTIDADE)
-                                    novo = false
-                                }
-                            }
-                            if (novo) {
-                                resultado.push({
-                                    FOOD_ID: i.FOOD_ID,
-                                    ALIMENTO: i.ALIMENTO,
-                                    DESCRICAO: i.DESCRICAO,
-                                    NUTRIENTE: [i.NUTRIENTE],
-                                    QUANTIDADE: [i.QUANTIDADE]
-                                })
-                            }
-                        }
-                        rows = resultado
-            */
-      //---------------------------------------------------------------------------
-      //método jsgrid
       //une os registros com o mesmo id de alimento
       var resultado = []
       for (let i of rows) {
@@ -166,7 +152,7 @@ module.exports.bankList = function (req, res) {
       rows.push(json)
 
       if (rows) {
-        console.log(rows)
+        //console.log(rows)
         res.format({
           html: function () {
             res.render("foodBank")

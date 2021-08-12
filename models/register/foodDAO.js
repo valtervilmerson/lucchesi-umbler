@@ -70,4 +70,33 @@ FoodRegisterDAO.prototype.deleteItem = function (req, callback) {
   )
 }
 
+FoodRegisterDAO.prototype.tableFoodUpdate = function (req, callback) {
+  this._connection.run(
+    "UPDATE FOOD SET FOOD_NAME = '" +
+      req.item.ALIMENTO +
+      "', FOOD_DESC = '" +
+      req.item.DESCRICAO +
+      "' WHERE FOOD_ID = " +
+      req.item.FOOD_ID
+  )
+}
+
+FoodRegisterDAO.prototype.foodxNutrientsUpdate = function (req, callback) {
+  this._connection.run(
+    "UPDATE FOOD_X_NUTRIENTS SET FXN_QTD = " +
+      req.qtd +
+      " WHERE FXN_FOOD_ID = " +
+      req.food_id +
+      " AND FXN_NU_ID = " +
+      req.nutrientID
+  )
+}
+
+FoodRegisterDAO.prototype.nutrientCheck = function (req, callback) {
+  this._connection.get(
+    "SELECT 1 FROM FOOD_X_NUTRIENTS WHERE FXN_NU_ID = " + req.nutrientID,
+    callback
+  )
+}
+
 module.exports = FoodRegisterDAO

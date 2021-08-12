@@ -1,6 +1,6 @@
 const urlServer = "http://nutrisa-com-br.umbler.net/"
 //const urlServer = "http://localhost:3000/"
-
+//
 function login() {
   var json = {
     usuario: document.getElementById("usuario").value.toUpperCase(),
@@ -86,23 +86,6 @@ function SendRequest(json, url, callback) {
 }
 
 function nutrientInsert() {
-  /* var table = document.getElementById('tableBody')
-    var firstRow = document.getElementById('firstRow')
-    var rows = table.childElementCount - 1
-
-
-    if (firstRow != undefined) {
-        firstRow.remove()
-    }
-
-    $('#nutrientsTable').find('tbody')
-        .append('<tr class="linhaSelecionada">' +
-            '<td>' + `${rows + 1}` + '</td>' +
-            '<td>' + $('#nutrients :selected').text() + '</td>' +
-            '<td>' + document.querySelector('#nutrients option:checked').dataset.descritivo + '</td>' +
-            '<td>' + $('#quantidade').val() + '</td>'
-        ) */
-
   var nutrientsList = document.getElementById("nutrients_select")
   var option = document.createElement("option")
   option.innerHTML =
@@ -169,7 +152,7 @@ $("#ajax").on("click", function () {
     headers: {
       Accept: "application/json",
     },
-    url: "http://localhost:3000/foodRegister/bankList",
+    url: urlServer + "/foodRegister/bankList",
     success: function (data) {
       console.log("SUCCESS : ", data)
     },

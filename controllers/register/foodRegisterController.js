@@ -24,6 +24,34 @@ module.exports.foodRegister = function (req, res) {
   db.close()
 }
 
+module.exports.jsGridUpdate = function (req, res) {
+  var connection = new dbConnection()
+  var db = connection.Connection()
+  var foodModel = new foodDAO(db)
+
+  let requisition = req.body
+  let nutrients = requisition.ids
+  let json = { food_id: requisition.item.FOOD_ID }
+
+  foodModel.tableFoodUpdate(requisition, function (err) {})
+
+  for (x in nutrients) {
+    json.nutrientID = nutrients[x]
+    json.qtd = requisition.item[x]
+
+    foodModel.foodxNutrientsUpdate(json, function (err) {})
+    foodModel.nutrientCheck(json, function (err, rows) {
+      if (!rows) {
+        foodModel.foodxNutrientsInsert(json, json.food_id, function (err) {})
+      }
+    })
+  }
+
+  db.close()
+  res.end()
+  //{food_id: 1, x:1}
+}
+
 module.exports.jsGridInsert = function (req, res) {
   var connection = new dbConnection()
   var db = connection.Connection()

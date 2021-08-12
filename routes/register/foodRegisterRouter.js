@@ -26,4 +26,8 @@ router.post("/jsGridInsert", function (req, res) {
 router.post("/jsGridDelete", function (req, res) {
   foodController.jsGridDelete(req, res)
 })
+
+router.post("/jsGridUpdate", function (req, res) {
+  foodController.jsGridUpdate(req, res)
+})
 module.exports = router

@@ -2,8 +2,10 @@ const urlServer = "http://nutrisa-com-br.umbler.net"
 //const urlServer = "http://localhost:3000"
 
 var ids = {}
-
+//
 $(function () {
+  InitGridCustomFields()
+
   $("#jsGrid").jsGrid({
     height: "600",
     width: "100%",
@@ -47,26 +49,56 @@ $(function () {
           data: deletedItem,
         })
       },
+      updateItem: function (item) {
+        let updatedItens = { ids, item }
+        return $.ajax({
+          type: "POST",
+          url: urlServer + "/foodRegister/jsGridUpdate",
+          data: updatedItens,
+        })
+      },
     },
     deleteConfirm: function (item) {
       return "O item " + item.ALIMENTO + " será removido. Tem certeza?"
     },
     fields: [],
   })
-})
 
-$.ajax({
-  headers: {
-    Accept: "application/json",
-  },
-  url: urlServer + "/foodRegister/bankList",
-  success: function (data) {
-    campos = montarArray(data)
-  },
-  error: function (e, str) {
-    console.log("ERROR : ", e)
-    console.log(str)
-  },
+  $.ajax({
+    headers: {
+      Accept: "application/json",
+    },
+    url: urlServer + "/foodRegister/bankList",
+    success: function (data) {
+      campos = montarArray(data)
+    },
+    error: function (e, str) {
+      console.log("ERROR : ", e)
+      console.log(str)
+    },
+  })
+
+  function InitGridCustomFields() {
+    var FloatNumberField = function (config) {
+      jsGrid.NumberField.call(this, config)
+    }
+
+    FloatNumberField.prototype = new jsGrid.NumberField({
+      filterValue: function () {
+        return parseFloat(this.filterControl.val())
+      },
+
+      insertValue: function () {
+        return parseFloat(this.insertControl.val())
+      },
+
+      editValue: function () {
+        return parseFloat(this.editControl.val())
+      },
+    })
+
+    jsGrid.fields.floatNumber = FloatNumberField
+  }
 })
 
 function montarArray(data) {
@@ -96,7 +128,7 @@ function montarArray(data) {
   for (let x in nutrients.nutrientsList) {
     campos.push(
       JSON.parse(
-        `{"name":"${nutrients.nutrientsList[x]}", "width": "110", "type": "number", "align":"center", "id":"1"}`
+        `{"name":"${nutrients.nutrientsList[x]}", "width": "110", "type": "floatNumber", "align":"center"}`
       )
     )
 

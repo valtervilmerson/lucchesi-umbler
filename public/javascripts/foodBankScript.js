@@ -15,7 +15,16 @@ $(function () {
     paging: true,
     autoload: true,
     inserting: true,
-    pageSize: 20,
+    pageSize: 10,
+    pageButtonCount: 5,
+    noDataContent: "Sem dados",
+    pagerFormat:
+      "Páginas: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} de {pageCount}",
+    pageNextText: "Próxima",
+    pagePrevText: "Anterior",
+    pageFirstText: "Primeira",
+    pageLastText: "Última",
+    loadMessage: "A carregar dados...",
     pageButtonCount: 5,
 
     controller: {
@@ -34,6 +43,7 @@ $(function () {
       },
       insertItem: function (item) {
         insertedItens = { itens: item, ids: ids }
+
         return $.ajax({
           type: "POST",
           url: urlServer + "/foodRegister/jsGridInsert",
@@ -85,15 +95,21 @@ $(function () {
 
     FloatNumberField.prototype = new jsGrid.NumberField({
       filterValue: function () {
-        return parseFloat(this.filterControl.val())
+        return this.filterControl.val()
+          ? parseFloat(this.filterControl.val())
+          : undefined
       },
 
       insertValue: function () {
-        return parseFloat(this.insertControl.val())
+        return this.insertControl.val()
+          ? parseFloat(this.insertControl.val())
+          : undefined
       },
 
       editValue: function () {
-        return parseFloat(this.editControl.val())
+        return this.editControl.val()
+          ? parseFloat(this.editControl.val())
+          : undefined
       },
     })
 

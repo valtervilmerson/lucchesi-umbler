@@ -33,19 +33,29 @@ module.exports.jsGridUpdate = function (req, res) {
   let nutrients = requisition.ids
   let json = { food_id: requisition.item.FOOD_ID }
 
-  foodModel.tableFoodUpdate(requisition, function (err) {})
+  foodModel.checkFoodExistence(requisition, function (err, rows) {
+    if (rows) {
+      if (rows.FOOD_ID == requisition.item.FOOD_ID) {
+        foodModel.tableFoodUpdate(requisition, function (err) {})
 
-  for (x in nutrients) {
-    json.nutrientID = nutrients[x]
-    json.qtd = requisition.item[x]
+        for (x in nutrients) {
+          json.nutrientID = nutrients[x]
+          json.qtd = requisition.item[x]
 
-    foodModel.foodxNutrientsUpdate(json, function (err) {})
-    foodModel.nutrientCheck(json, function (err, rows) {
-      if (!rows) {
-        foodModel.foodxNutrientsInsert(json, json.food_id, function (err) {})
+          foodModel.foodxNutrientsUpdate(json, function (err) {})
+          foodModel.nutrientCheck(json, function (err, rows) {
+            if (!rows) {
+              foodModel.foodxNutrientsInsert(
+                json,
+                json.food_id,
+                function (err) {}
+              )
+            }
+          })
+        }
       }
-    })
-  }
+    }
+  })
 
   db.close()
   res.end()
@@ -59,21 +69,25 @@ module.exports.jsGridInsert = function (req, res) {
   let requisition = req.body
   let nutrientsXfood = {}
 
-  requisition.name = requisition.itens.ALIMENTO
-  requisition.desc = requisition.itens.DESCRICAO
+  requisition.name = requisition.item.ALIMENTO
+  requisition.desc = requisition.item.DESCRICAO
 
-  foodModel.foodInsert(requisition, function (err, rows) {
-    foodModel.lastID(function (err, rows) {
-      for (const prop in requisition.ids) {
-        nutrientsXfood.nutrientID = requisition.ids[prop]
-        nutrientsXfood.qtd = requisition.itens[prop]
-        foodModel.foodxNutrientsInsert(
-          nutrientsXfood,
-          rows.lastID,
-          function (err, rows) {}
-        )
-      }
-    })
+  foodModel.checkFoodExistence(requisition, function (err, rows) {
+    if (!rows) {
+      foodModel.foodInsert(requisition, function (err, rows) {
+        foodModel.lastID(function (err, rows) {
+          for (const prop in requisition.ids) {
+            nutrientsXfood.nutrientID = requisition.ids[prop]
+            nutrientsXfood.qtd = requisition.item[prop]
+            foodModel.foodxNutrientsInsert(
+              nutrientsXfood,
+              rows.lastID,
+              function (err, rows) {}
+            )
+          }
+        })
+      })
+    }
   })
 
   db.close()

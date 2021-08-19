@@ -76,7 +76,8 @@ FoodRegisterDAO.prototype.tableFoodUpdate = function (req, callback) {
       req.item.ALIMENTO +
       "', FOOD_DESC = '" +
       req.item.DESCRICAO +
-      "' WHERE FOOD_ID = " +
+      "', FOOD_ALTERATION = DATETIME()" +
+      " WHERE FOOD_ID = " +
       req.item.FOOD_ID
   )
 }
@@ -95,6 +96,18 @@ FoodRegisterDAO.prototype.foodxNutrientsUpdate = function (req, callback) {
 FoodRegisterDAO.prototype.nutrientCheck = function (req, callback) {
   this._connection.get(
     "SELECT 1 FROM FOOD_X_NUTRIENTS WHERE FXN_NU_ID = " + req.nutrientID,
+    callback
+  )
+}
+
+FoodRegisterDAO.prototype.checkFoodExistence = function (
+  requisition,
+  callback
+) {
+  this._connection.get(
+    "SELECT FOOD_ID FROM FOOD WHERE FOOD_NAME LIKE '%" +
+      requisition.item.ALIMENTO +
+      "%'",
     callback
   )
 }

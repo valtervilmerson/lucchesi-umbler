@@ -1,5 +1,6 @@
 const urlServer = "http://nutrisa-com-br.umbler.net"
 //const urlServer = "http://localhost:3000"
+//
 
 var ids = {}
 //
@@ -42,8 +43,8 @@ $(function () {
         return d.promise()
       },
       insertItem: function (item) {
-        insertedItens = { itens: item, ids: ids }
-
+        insertedItens = { item: item, ids: ids }
+        console.log(insertedItens)
         return $.ajax({
           type: "POST",
           url: urlServer + "/foodRegister/jsGridInsert",
